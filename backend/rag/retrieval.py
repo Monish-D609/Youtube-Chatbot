@@ -127,10 +127,63 @@ def rerank(query: str, candidates: List[Dict], top_k: int = 4) -> List[Dict]:
     return scored[:top_k]
 
 
+GLOBAL_QUERY_TRIGGERS = {
+    "summarize", "summary", "summarise", "overview", "recap",
+    "takeaway", "takeaways", "key points", "key point", "main points",
+    "main ideas", "what is this video about", "what's this video about",
+    "what does this video cover", "tldr", "tl;dr", "briefly explain",
+    "give me a brief", "what happened", "what did", "whole video",
+    "entire video", "full video", "all about", "explain this video",
+    "describe this video",
+}
+
+
+def is_global_query(query: str) -> bool:
+    """
+    Returns True if the query is holistic/global (e.g. summarise, takeaways).
+    These queries have no single matching chunk, so vector search fails them.
+    """
+    q_lower = query.lower().strip()
+    return any(trigger in q_lower for trigger in GLOBAL_QUERY_TRIGGERS)
+
+
+def global_retrieve(video_id: str, n_chunks: int = 12) -> List[Dict]:
+    """
+    Timeline-stratified sampling: picks chunks evenly across the full video.
+    Returns a cross-section that covers intro → body → conclusion so the LLM
+    can synthesize a holistic answer without a FAISS search.
+    """
+    _, store = load_faiss_index(video_id)
+    chunks = store["chunks"]
+
+    if not chunks:
+        return []
+
+    total = len(chunks)
+    if total <= n_chunks:
+        return chunks  # small video — return everything
+
+    # Sample evenly: divide timeline into n_chunks equal buckets
+    indices = [int(round(i * (total - 1) / (n_chunks - 1))) for i in range(n_chunks)]
+    seen = set()
+    sampled = []
+    for idx in indices:
+        if idx not in seen:
+            seen.add(idx)
+            sampled.append({**chunks[idx], "source": "global_sample"})
+
+    return sampled
+
+
 def retrieve(video_id: str, query: str, top_k: int = 4) -> List[Dict]:
     """
-    Full retrieval: semantic + BM25 → RRF → rerank.
+    Full retrieval pipeline:
+    - Global queries (summarise, overview, etc.) → timeline-stratified sampling
+    - Everything else → semantic + BM25 → RRF → rerank
     """
+    if is_global_query(query):
+        return global_retrieve(video_id, n_chunks=12)
+
     semantic_hits = semantic_search(video_id, query, top_k=8)
     bm25_hits = bm25_search(video_id, query, top_k=8)
     merged = reciprocal_rank_fusion(semantic_hits, bm25_hits)

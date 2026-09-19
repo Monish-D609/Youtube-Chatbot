@@ -1,6 +1,6 @@
 """
 Generation — OpenRouter streaming via SSE
-Uses anthropic/claude-3.5-sonnet for best-quality video synthesis.
+Model: google/gemini-2.5-flash-lite (via OpenRouter)
 """
 import os
 import json
@@ -26,6 +26,17 @@ You have access to transcript excerpts from a YouTube video. Your job is to:
 
 You must never invent information not present in the transcript."""
 
+SUMMARY_SYSTEM_PROMPT = """You are a brilliant AI research assistant specialized in synthesizing YouTube video content.
+
+You have been given transcript excerpts sampled from across the ENTIRE video timeline (intro, middle, and conclusion). Your job is to:
+1. Produce a comprehensive, well-structured answer that covers the WHOLE video — not just one section
+2. Use clear headings, bullet points, or numbered lists to organize your response
+3. Highlight the key ideas, arguments, or takeaways the creator presents
+4. Reference timestamps where relevant (e.g. "At 2:14, the speaker introduces...")
+5. Write in a way that someone who hasn't watched the video can fully understand the content
+
+You must never invent information not present in the transcript."""
+
 
 def build_context(chunks: List[Dict]) -> str:
     """Format retrieved chunks into a structured context block."""
@@ -40,16 +51,30 @@ def build_messages(
     context: str,
     question: str,
     history: List[Dict],
+    is_global: bool = False,
 ) -> List[Dict]:
     """Build the message list for the OpenRouter API call."""
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    system_prompt = SUMMARY_SYSTEM_PROMPT if is_global else SYSTEM_PROMPT
+    messages = [{"role": "system", "content": system_prompt}]
 
     # Inject last 6 turns of conversation history
     for turn in history[-6:]:
-        messages.append({"role": turn["role"], "content": turn["content"]})
+        if isinstance(turn, dict):
+            role = turn.get("role", "user")
+            content = turn.get("content", "")
+        else:
+            role = getattr(turn, "role", "user")
+            content = getattr(turn, "content", "")
+        if content:
+            messages.append({"role": str(role), "content": str(content)})
 
     # Current user turn with context
-    user_content = f"""Transcript context from the video:
+    preamble = (
+        "The following excerpts are sampled evenly across the FULL video timeline to give you complete coverage:"
+        if is_global
+        else "Transcript context from the video:"
+    )
+    user_content = f"""{preamble}
 
 {context}
 
@@ -65,20 +90,24 @@ async def stream_answer(
     chunks: List[Dict],
     question: str,
     history: List[Dict],
+    is_global: bool = False,
 ) -> AsyncGenerator[str, None]:
     """
     Call OpenRouter with streaming and yield SSE-formatted data strings.
     Each yielded string is a complete SSE event.
     """
     context = build_context(chunks)
-    messages = build_messages(context, question, history)
+    messages = build_messages(context, question, history, is_global=is_global)
+
+    # Global/summary queries need more tokens for a complete structured answer
+    max_tokens = 2500 if is_global else 1500
 
     payload = {
         "model": MODEL,
         "messages": messages,
         "stream": True,
         "temperature": 0.3,
-        "max_tokens": 1500,
+        "max_tokens": max_tokens,
     }
 
     headers = {

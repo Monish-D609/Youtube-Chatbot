@@ -24,7 +24,7 @@ from rag.models import (
     VideoInfo, SessionSummary,
 )
 from rag.ingestion import ingest_video, is_indexed, get_video_metadata, get_stored_metadata
-from rag.retrieval import retrieve
+from rag.retrieval import retrieve, is_global_query
 from rag.generation import stream_answer, generate_answer
 from db.sessions import init_db, create_session, save_message, get_history, list_sessions
 
@@ -130,7 +130,8 @@ async def chat(req: ChatRequest):
     if not history:
         history = await get_history(session_id)
 
-    # Retrieve relevant chunks
+    # Retrieve relevant chunks (global router auto-detects summary intent)
+    global_query = is_global_query(req.question)
     chunks = retrieve(req.video_id, req.question, top_k=4)
 
     # Save user message to DB
@@ -140,34 +141,38 @@ async def chat(req: ChatRequest):
 
     async def event_stream():
         full_answer = []
+        try:
+            # Stream answer tokens
+            async for event in stream_answer(chunks, req.question, history, is_global=global_query):
+                yield event
+                if event.startswith("data: ") and not event.startswith("data: [DONE]"):
+                    try:
+                        token_data = json.loads(event[6:])
+                        full_answer.append(token_data.get("token", ""))
+                    except Exception:
+                        pass
 
-        # Stream answer tokens
-        async for event in stream_answer(chunks, req.question, history):
-            yield event
-            if event.startswith("data: ") and not event.startswith("data: [DONE]"):
-                try:
-                    token_data = json.loads(event[6:])
-                    full_answer.append(token_data.get("token", ""))
-                except Exception:
-                    pass
+            # Emit sources as a final event before DONE
+            sources = [
+                {
+                    "text": c["text"][:300],
+                    "start_time": c.get("start_time"),
+                    "timestamp_label": c.get("timestamp_label"),
+                }
+                for c in chunks
+            ]
+            yield f"data: {json.dumps({'sources': sources, 'session_id': session_id})}\n\n"
 
-        # Emit sources as a final event before DONE
-        sources = [
-            {
-                "text": c["text"][:300],
-                "start_time": c.get("start_time"),
-                "timestamp_label": c.get("timestamp_label"),
-            }
-            for c in chunks
-        ]
-        yield f"data: {json.dumps({'sources': sources, 'session_id': session_id})}\n\n"
+            # Persist full answer
+            complete_answer = "".join(full_answer)
+            if complete_answer:
+                await save_message(session_id, "assistant", complete_answer)
 
-        # Persist full answer
-        complete_answer = "".join(full_answer)
-        if complete_answer:
-            await save_message(session_id, "assistant", complete_answer)
-
-        yield "data: [DONE]\n\n"
+        except Exception as e:
+            err_msg = json.dumps({"token": f"\n\n*(Error generating answer: {str(e)})*"})
+            yield f"data: {err_msg}\n\n"
+        finally:
+            yield "data: [DONE]\n\n"
 
     return StreamingResponse(
         event_stream(),
