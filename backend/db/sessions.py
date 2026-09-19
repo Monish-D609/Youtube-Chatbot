@@ -1,90 +1,141 @@
-"""SQLite-backed session and chat history storage."""
+"""
+Supabase-backed session and chat history storage.
+
+Tables (create once in Supabase SQL editor):
+    CREATE TABLE sessions (
+        session_id  TEXT PRIMARY KEY,
+        video_id    TEXT NOT NULL,
+        video_title TEXT,
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+
+    CREATE TABLE messages (
+        id          BIGSERIAL PRIMARY KEY,
+        session_id  TEXT NOT NULL REFERENCES sessions(session_id) ON DELETE CASCADE,
+        role        TEXT NOT NULL,
+        content     TEXT NOT NULL,
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+
+    CREATE INDEX messages_session_idx ON messages(session_id, created_at);
+"""
 import os
 import uuid
-import json
-import aiosqlite
-from datetime import datetime
-from typing import List, Dict, Optional
+from datetime import datetime, timezone
+from typing import List, Dict
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "chatbot.db")
+from supabase import create_client, Client
+from dotenv import load_dotenv
+
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL", "")
+SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY", "")
+
+_client: Client | None = None
+
+
+def _get_client() -> Client:
+    """Lazily initialise the Supabase client (singleton)."""
+    global _client
+    if _client is None:
+        if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
+            raise RuntimeError(
+                "SUPABASE_URL and SUPABASE_SERVICE_KEY must be set in your .env"
+            )
+        _client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+    return _client
 
 
 async def init_db():
-    async with aiosqlite.connect(DB_PATH) as db:
-        await db.execute("""
-            CREATE TABLE IF NOT EXISTS sessions (
-                session_id TEXT PRIMARY KEY,
-                video_id TEXT NOT NULL,
-                video_title TEXT,
-                created_at TEXT NOT NULL
-            )
-        """)
-        await db.execute("""
-            CREATE TABLE IF NOT EXISTS messages (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                session_id TEXT NOT NULL,
-                role TEXT NOT NULL,
-                content TEXT NOT NULL,
-                created_at TEXT NOT NULL,
-                FOREIGN KEY (session_id) REFERENCES sessions(session_id)
-            )
-        """)
-        await db.commit()
+    """No-op: tables are pre-created in Supabase. Kept for API compatibility."""
+    pass
 
 
 async def create_session(video_id: str, video_title: str = "") -> str:
+    """Insert a new chat session row and return its UUID."""
+    client = _get_client()
     session_id = str(uuid.uuid4())
-    async with aiosqlite.connect(DB_PATH) as db:
-        await db.execute(
-            "INSERT INTO sessions (session_id, video_id, video_title, created_at) VALUES (?, ?, ?, ?)",
-            (session_id, video_id, video_title, datetime.utcnow().isoformat()),
-        )
-        await db.commit()
+    client.table("sessions").insert(
+        {
+            "session_id": session_id,
+            "video_id": video_id,
+            "video_title": video_title,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+    ).execute()
     return session_id
 
 
 async def save_message(session_id: str, role: str, content: str):
-    async with aiosqlite.connect(DB_PATH) as db:
-        await db.execute(
-            "INSERT INTO messages (session_id, role, content, created_at) VALUES (?, ?, ?, ?)",
-            (session_id, role, content, datetime.utcnow().isoformat()),
-        )
-        await db.commit()
+    """Persist a single chat message."""
+    client = _get_client()
+    client.table("messages").insert(
+        {
+            "session_id": session_id,
+            "role": role,
+            "content": content,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+    ).execute()
 
 
 async def get_history(session_id: str, limit: int = 12) -> List[Dict]:
-    async with aiosqlite.connect(DB_PATH) as db:
-        async with db.execute(
-            "SELECT role, content FROM messages WHERE session_id = ? ORDER BY id DESC LIMIT ?",
-            (session_id, limit),
-        ) as cursor:
-            rows = await cursor.fetchall()
-    # Return in chronological order
-    return [{"role": r[0], "content": r[1]} for r in reversed(rows)]
+    """Return the last `limit` messages for a session in chronological order."""
+    client = _get_client()
+    response = (
+        client.table("messages")
+        .select("role, content")
+        .eq("session_id", session_id)
+        .order("created_at", desc=False)
+        .limit(limit)
+        .execute()
+    )
+    rows = response.data or []
+    return [{"role": r["role"], "content": r["content"]} for r in rows]
 
 
 async def list_sessions(limit: int = 50) -> List[Dict]:
-    async with aiosqlite.connect(DB_PATH) as db:
-        async with db.execute(
-            """
-            SELECT s.session_id, s.video_id, s.video_title, s.created_at,
-                   COUNT(m.id) as message_count
-            FROM sessions s
-            LEFT JOIN messages m ON s.session_id = m.session_id
-            GROUP BY s.session_id
-            ORDER BY s.created_at DESC
-            LIMIT ?
-            """,
-            (limit,),
-        ) as cursor:
-            rows = await cursor.fetchall()
+    """Return recent sessions with message counts, newest first."""
+    client = _get_client()
+
+    # Fetch sessions
+    sessions_resp = (
+        client.table("sessions")
+        .select("session_id, video_id, video_title, created_at")
+        .order("created_at", desc=True)
+        .limit(limit)
+        .execute()
+    )
+    sessions = sessions_resp.data or []
+
+    if not sessions:
+        return []
+
+    # Fetch message counts for those sessions in a single query
+    session_ids = [s["session_id"] for s in sessions]
+    counts_resp = (
+        client.table("messages")
+        .select("session_id")
+        .in_("session_id", session_ids)
+        .execute()
+    )
+    counts_raw = counts_resp.data or []
+
+    # Build a count map
+    count_map: Dict[str, int] = {}
+    for row in counts_raw:
+        sid = row["session_id"]
+        count_map[sid] = count_map.get(sid, 0) + 1
+
     return [
         {
-            "session_id": r[0],
-            "video_id": r[1],
-            "video_title": r[2],
-            "created_at": r[3],
-            "message_count": r[4],
+            "session_id": s["session_id"],
+            "video_id": s["video_id"],
+            "video_title": s["video_title"],
+            "created_at": s["created_at"],
+            "message_count": count_map.get(s["session_id"], 0),
         }
-        for r in rows
+        for s in sessions
     ]
