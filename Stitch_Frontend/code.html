@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container": "#211f1d", "on-secondary": "#4b2700", "on-primary-fixed": "#390c00", "background": "#141311", "secondary-fixed": "#ffdcc0", "on-primary": "#581e08", "surface-container-highest": "#363432", "on-error": "#690005", "tertiary": "#ffb77d", "outline": "#a28c86", "on-primary-fixed-variant": "#75331c", "error-container": "#93000a", "inverse-surface": "#e6e2de", "primary": "#ffb59d", "surface-dim": "#141311", "tertiary-fixed-dim": "#ffb77d", "secondary": "#f8ba82", "surface-container-lowest": "#0f0e0c", "surface-container-high": "#2b2a28", "surface": "#141311", "inverse-primary": "#924a31", "tertiary-fixed": "#ffdcc3", "on-secondary-fixed-variant": "#673d10", "surface-bright": "#3b3936", "tertiary-container": "#d97707", "on-tertiary-fixed": "#2f1500", "secondary-fixed-dim": "#f8ba82", "on-secondary-container": "#e5a973", "primary-container": "#cf7a5e", "surface-tint": "#ffb59d", "on-primary-container": "#4f1704", "inverse-on-surface": "#32302e", "on-surface-variant": "#dac1ba", "secondary-container": "#673d10", "surface-variant": "#363432", "on-surface": "#e6e2de", "on-tertiary-container": "#432100", "on-secondary-fixed": "#2d1600", "primary-fixed": "#ffdbd0", "surface-container-low": "#1c1b19", "on-background": "#e6e2de", "error": "#ffb4ab", "on-error-container": "#ffdad6", "on-tertiary": "#4d2600", "primary-fixed-dim": "#ffb59d", "outline-variant": "#54433e", "on-tertiary-fixed-variant": "#6e3900" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-desktop": "1.5rem", "gutter": "1rem", "space-md": "1rem", "margin-desktop": "2rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "margin": "1rem" }, "fontFamily": { "display-lg-mobile": [ "Geist" ], "code-md": [ "JetBrains Mono" ], "timestamp-tag": [ "JetBrains Mono" ], "headline-sm": [ "Geist" ], "display-lg": [ "Geist" ], "body-sm": [ "Geist" ], "label-xs": [ "JetBrains Mono" ], "body-lg": [ "Geist" ], "headline-md": [ "Geist" ], "body-md": [ "Geist" ] }, "fontSize": { "display-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "code-md": [ "13px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "timestamp-tag": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-sm": [ "18px", { "lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "500" } ], "display-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" } ], "label-xs": [ "10px", { "lineHeight": "12px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "500" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" } ] } } } }</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-primary/20 selection:text-primary"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between select-none shadow-[1px_0_12px_rgba(0,0,0,0.35)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-14 px-space-md flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="TubeClaude Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V-0HBUfgMXOM4o-LgEg_tXMCeeklzoMhuLXl4Vom4J_O00vNDIzM5xg5WoIq-JVbLPdkl85b6aGc4WXJIuw0tMDXKAJwRo4qyYBAmabNod25JWVz_TOjstogwSlMxzUZ9eFvWyQyuSDiEFltVy8RLcUqzJStUw8ta-SdlYQDkgmbngMXBbxdkYr5j0iySQ1OXRHI5_UeiAXxtDCpRJceILX7BT128j45HuLkp539GZ3NKdosLDPkx9Rbk"/><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">TubeClaude</span><span class="px-1.5 py-0.5 rounded bg-surface-container text-secondary font-label-xs text-label-xs">v2.4</span></div><button class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" title="Toggle Sidebar"><span class="material-symbols-outlined text-[18px]">dock_to_right</span></button></div><div class="px-space-md py-space-xs"><button class="w-full flex items-center justify-between px-space-md py-2 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all shadow-sm group"><div class="flex items-center gap-space-sm font-headline-sm text-body-sm font-medium"><span class="material-symbols-outlined text-[18px]">add</span><span>New Session</span></div><span class="px-1.5 py-0.5 rounded bg-surface-container-lowest/60 text-primary-fixed font-label-xs text-label-xs">⌘K</span></button></div><div class="px-space-md pt-space-xs pb-space-sm"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-2.5 text-[16px] text-on-surface-variant">search</span><input class="w-full bg-surface-container-low text-on-surface placeholder:text-outline text-body-sm font-body-sm rounded-lg pl-8 pr-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="Filter video chats..." type="text"/></div></div><div class="flex-1 overflow-y-auto px-space-sm py-space-xs space-y-space-md"><nav class="space-y-space-md" data-active-classes="bg-surface-container-high text-on-surface font-medium border-l-2 border-primary-container"><div class="space-y-0.5"><div class="px-space-sm py-1 font-label-xs text-label-xs uppercase tracking-wider text-outline">Today</div><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg transition-all group bg-surface-container-high text-on-surface font-medium border-l-2 border-primary-container" data-path="chat-stream" href="#"><span class="material-symbols-outlined text-[16px] text-secondary">play_circle</span><div class="flex-1 min-w-0"><p class="text-body-sm font-body-sm truncate">Andrej Karpathy: Deep Dive into LLMs</p><span class="font-timestamp-tag text-timestamp-tag text-outline">3h 14m • active</span></div></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all group" data-path="lex-fridman-session" href="#"><span class="material-symbols-outlined text-[16px] text-outline">smart_display</span><div class="flex-1 min-w-0"><p class="text-body-sm font-body-sm truncate">Lex Fridman #412 with Yann LeCun</p><span class="font-timestamp-tag text-timestamp-tag text-outline">2h 45m</span></div></a></div><div class="space-y-0.5"><div class="px-space-sm py-1 font-label-xs text-label-xs uppercase tracking-wider text-outline">Yesterday</div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all group" data-path="3blue1brown-session" href="#"><span class="material-symbols-outlined text-[16px] text-outline">smart_display</span><div class="flex-1 min-w-0"><p class="text-body-sm font-body-sm truncate">3Blue1Brown - Attention in Transformers</p><span class="font-timestamp-tag text-timestamp-tag text-outline">24m 10s</span></div></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all group" data-path="fireship-trends" href="#"><span class="material-symbols-outlined text-[16px] text-outline">smart_display</span><div class="flex-1 min-w-0"><p class="text-body-sm font-body-sm truncate">Fireship: 10 Web Dev Trends</p><span class="font-timestamp-tag text-timestamp-tag text-outline">11m 32s</span></div></a></div><div class="space-y-0.5"><div class="px-space-sm py-1 font-label-xs text-label-xs uppercase tracking-wider text-outline">Previous 7 Days</div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all group" data-path="veritasium-session" href="#"><span class="material-symbols-outlined text-[16px] text-outline">smart_display</span><div class="flex-1 min-w-0"><p class="text-body-sm font-body-sm truncate">Veritasium: The Infinite Paradox</p><span class="font-timestamp-tag text-timestamp-tag text-outline">19m 48s</span></div></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all group" data-path="library" href="#"><span class="material-symbols-outlined text-[16px] text-outline">video_library</span><span class="text-body-sm font-body-sm truncate">View Video Library</span></a></div></nav></div></div><div class="p-space-sm bg-surface-container-lowest"><div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors"><div class="flex items-center gap-space-sm min-w-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtvIFc0wme_UyHzkdLFj4AG0adPLC12mIJVt3S043pdFVdOu6GbAYLtVb7TURbKduNFO5ffilQl5D8kG1AZLtXnIZ31BPWE0KeXMeu9xHyz0lLjAPsRY1SwT6-ubwIjHSKky4EamHCO2fwUUZdDlhNweF-bG18eMlBZHd3oQUkCQct_wTGEpOQnFJDpe1R7LPV8retck3uBP8RDHxP5iSkICZ_YR1fA-7zvJG1Ty02bmRCUODHwxS3"/><div class="flex-1 min-w-0"><div class="text-body-sm font-body-sm font-medium text-on-surface truncate">Alex Vance</div><div class="text-label-xs font-label-xs text-secondary truncate">Claude Pro • Unlimited</div></div></div><a class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" data-path="settings" href="#" title="Settings"><span class="material-symbols-outlined text-[18px]">settings</span></a></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-14 bg-surface/85 backdrop-blur-xl z-40 px-space-gutter flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-sm min-w-0"><span class="material-symbols-outlined text-[18px] text-secondary">ondemand_video</span><span class="font-body-md text-body-md font-medium text-on-surface truncate max-w-sm lg:max-w-md">Andrej Karpathy: Deep Dive into LLMs</span><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="https://youtube.com" rel="noreferrer" target="_blank"><span class="material-symbols-outlined text-[15px]">open_in_new</span></a></div><div class="h-4 w-px bg-surface-container-high"></div><div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container-low text-secondary font-code-md text-code-md"><span class="inline-block w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span><span>1080p Synced</span></div></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high cursor-pointer transition-colors"><span class="material-symbols-outlined text-[16px] text-primary">neurology</span><span>Claude 3.5 Sonnet (Multimodal)</span><span class="material-symbols-outlined text-[14px] text-on-surface-variant">expand_more</span></div><div class="flex items-center gap-1"><button class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" title="Share Conversation"><span class="material-symbols-outlined text-[18px]">ios_share</span></button><button class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" title="Export Markdown"><span class="material-symbols-outlined text-[18px]">download</span></button></div></div></header><main class="relative pt-14 w-full min-h-screen bg-surface"><div class="flex flex-col w-full">
+<!-- Video Context Overview Card -->
+<section class="w-full px-space-md lg:px-space-xl pt-space-md pb-space-lg">
+<div class="max-w-5xl mx-auto rounded-xl bg-surface-container-low shadow-xl p-space-md lg:p-space-lg relative overflow-hidden group">
+<!-- Ambient Studio Glow -->
+<div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-gradient-to-br from-primary/10 via-tertiary-container/5 to-transparent blur-3xl pointer-events-none"></div>
+<!-- Video Details Grid -->
+<div class="flex flex-col lg:flex-row gap-space-md lg:gap-space-lg relative z-10">
+<!-- 16:9 Thumbnail Column -->
+<div class="w-full lg:w-72 shrink-0">
+<div class="relative aspect-video w-full rounded-lg overflow-hidden bg-surface-container-lowest shadow-md group/thumb cursor-pointer">
+<img class="w-full h-full object-cover group-hover/thumb:scale-105 transition-transform duration-500 ease-out" data-alt="Cinematic frame capture of a 3Blue1Brown educational animation showing luminous geometric vectors, glowing query and key dot product matrices in high-dimensional dark space, warm terracotta and amber ambient lighting, dark minimalist chalkboard aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqvRWEp21-dOdqxXvhGgEPbyhKGn6y0Vfuvkwm4dclnlPCtWqBoasNKVKXiF5xRMZA7_o_i5LSW0HL59qUlyz671j_gp2_riwiLhBxzYJasOScBJbhKJzLoFppfGdXrghZPT96CikSpn6CMctl6Z3hgemdKrDEBDhDPON6d-8K9TXNH-FP85Jdu8r-uZZDbr37T5ZxBfa0bEkAvIIuY0OMUUAq8HAAce-tROByrkWlu2g61oJpeLcL"/>
+<div class="absolute inset-0 bg-surface-container-lowest/40 group-hover/thumb:bg-surface-container-lowest/20 transition-colors flex items-center justify-center">
+<div class="w-11 h-11 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg group-hover/thumb:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<!-- Duration Badge -->
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 text-on-surface font-timestamp-tag text-timestamp-tag tracking-wider">
+              1:14:22
+            </div>
+<!-- Live Indicator Badge -->
+<div class="absolute top-2 left-2 flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-lowest/80 text-secondary font-label-xs text-label-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>INDEXED</span>
+</div>
+</div>
+</div>
+<!-- Video Metadata & Quick Actions -->
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<div class="flex items-center gap-space-sm flex-wrap mb-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-xs text-label-xs font-medium">Attention &amp; Deep Learning</span>
+<span class="text-outline font-label-xs text-label-xs">•</span>
+<span class="font-timestamp-tag text-timestamp-tag text-secondary font-medium">vtt_v2.4_indexed</span>
+<span class="text-outline font-label-xs text-label-xs">•</span>
+<span class="font-label-xs text-label-xs text-outline">Published Nov 2024</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight leading-snug">
+              How Transformers Work (Attention is all you need)
+            </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 flex items-center gap-2">
+<span class="font-medium text-on-surface">3Blue1Brown</span>
+<span class="material-symbols-outlined text-[15px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-outline">2.4M views</span>
+<span class="text-outline">1h 14m total length</span>
+</p>
+</div>
+<!-- Action Buttons Bar -->
+<div class="flex items-center gap-2 flex-wrap pt-3 mt-3">
+<a class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors" href="https://youtube.com" rel="noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[15px] text-secondary">open_in_new</span>
+<span>Open on YouTube</span>
+</a>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[15px] text-outline">file_download</span>
+<span>Transcript (.vtt/.md)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-container/20 text-primary font-body-sm text-body-sm hover:bg-primary-container/30 transition-colors">
+<span class="material-symbols-outlined text-[15px]">auto_awesome</span>
+<span>Key Takeaways</span>
+</button>
+<div class="ml-auto hidden sm:flex items-center gap-1 text-outline font-code-md text-code-md">
+<span class="material-symbols-outlined text-[15px]">timer</span>
+<span>12 Chapters</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Horizontal Chapter Ribbon -->
+<div class="mt-space-md pt-space-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">format_list_bulleted</span>
+            Indexed Chapters &amp; Keyframe Jumps
+          </span>
+<span class="font-timestamp-tag text-timestamp-tag text-secondary">100% vector embeddings ready</span>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+<button class="shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-bright transition-all">
+<span class="font-timestamp-tag text-timestamp-tag text-secondary">00:00</span>
+<span class="font-body-sm text-body-sm font-medium truncate max-w-[130px]">Introduction</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+<span class="font-timestamp-tag text-timestamp-tag text-outline">08:14</span>
+<span class="font-body-sm text-body-sm truncate max-w-[170px]">Self-Attention Mechanism</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-lg bg-primary-container text-on-primary-container shadow-sm font-medium">
+<span class="font-timestamp-tag text-timestamp-tag text-on-primary-container">24:30</span>
+<span class="font-body-sm text-body-sm truncate max-w-[190px]">Query, Key, Value Vectors</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+<span class="font-timestamp-tag text-timestamp-tag text-outline">42:15</span>
+<span class="font-body-sm text-body-sm truncate max-w-[170px]">Multi-Head Attention</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+<span class="font-timestamp-tag text-timestamp-tag text-outline">58:00</span>
+<span class="font-body-sm text-body-sm truncate max-w-[160px]">Training &amp; Loss Landscape</span>
+</button>
+<button class="shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+<span class="font-timestamp-tag text-timestamp-tag text-outline">1:09:10</span>
+<span class="font-body-sm text-body-sm truncate max-w-[140px]">Emergent Reasoning</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Conversational Stream (Claude Stage) -->
+<section class="w-full px-space-md lg:px-space-xl pb-56">
+<div class="max-w-3xl mx-auto space-y-space-xl">
+<!-- Claude System Ingestion Message -->
+<div class="flex items-start gap-space-md">
+<!-- Claude Icon / Monogram -->
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 shadow-sm mt-1">
+<span class="material-symbols-outlined text-[18px]">asterisk</span>
+</div>
+<div class="flex-1 space-y-space-md">
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Claude</span>
+<span class="font-label-xs text-label-xs text-outline px-1.5 py-0.5 rounded bg-surface-container">Video Ingest Complete</span>
+<span class="font-timestamp-tag text-timestamp-tag text-outline">14:02 PM</span>
+</div>
+<div class="font-body-lg text-body-lg text-on-surface space-y-3 leading-relaxed">
+<p>
+              I have thoroughly transcribed and parsed <span class="font-medium text-primary">"How Transformers Work"</span> by 3Blue1Brown. All 1 hour and 14 minutes of dialogue, math whiteboard keyframes, and animations have been aligned into high-precision vector timestamps.
+            </p>
+<!-- Video Synopsis Box -->
+<div class="p-space-md rounded-xl bg-surface-container-low text-on-surface space-y-space-sm shadow-sm">
+<div class="flex items-center gap-2 font-headline-sm text-body-md font-medium text-secondary">
+<span class="material-symbols-outlined text-[18px]">overview</span>
+<span>Core Concept Matrix</span>
+</div>
+<ul class="space-y-2 text-body-sm font-body-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<button class="shrink-0 px-2 py-0.5 rounded bg-surface-container-high text-secondary font-timestamp-tag text-timestamp-tag hover:bg-surface-bright transition-colors">▶ 08:14</button>
+<span><strong class="text-on-surface">Self-Attention Essence:</strong> Words update their representation depending on context, dynamically adjusting orientation in word-embedding space.</span>
+</li>
+<li class="flex items-start gap-2">
+<button class="shrink-0 px-2 py-0.5 rounded bg-surface-container-high text-secondary font-timestamp-tag text-timestamp-tag hover:bg-surface-bright transition-colors">▶ 24:30</button>
+<span><strong class="text-on-surface">Q, K, V Triad:</strong> Queries formulate what each token searches for; Keys broadcast attributes; Values encode the information transported when a match occurs.</span>
+</li>
+<li class="flex items-start gap-2">
+<button class="shrink-0 px-2 py-0.5 rounded bg-surface-container-high text-secondary font-timestamp-tag text-timestamp-tag hover:bg-surface-bright transition-colors">▶ 42:15</button>
+<span><strong class="text-on-surface">Multi-Head Geometry:</strong> Rather than a single associative subspace, parallel projections enable the network to simultaneously correlate grammar, semantics, and reference.</span>
+</li>
+</ul>
+</div>
+<!-- Spoken Quote Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex items-start gap-3">
+<span class="material-symbols-outlined text-[22px] text-secondary shrink-0">format_quote</span>
+<div class="space-y-1">
+<p class="font-body-sm text-body-sm italic text-on-surface">
+                  "Think of the Query as a question like 'Are you an adjective describing me?', the Key as an answer 'I am an adjective', and the Dot Product as the resonance score between them."
+                </p>
+<div class="flex items-center gap-2">
+<span class="font-label-xs text-label-xs text-outline">Grant Sanderson</span>
+<button class="px-1.5 py-0.2 rounded bg-surface-container-high text-primary font-timestamp-tag text-timestamp-tag hover:text-on-surface">@ 25:12</button>
+</div>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              What specific concepts or derivations would you like to explore first?
+            </p>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-start gap-space-md justify-end">
+<div class="max-w-xl space-y-1.5">
+<div class="flex items-center justify-end gap-2 text-outline">
+<span class="font-timestamp-tag text-timestamp-tag">14:04 PM</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Alex</span>
+</div>
+<div class="p-4 rounded-2xl rounded-tr-sm bg-surface-container-high text-on-surface shadow-md font-body-md text-body-md leading-relaxed">
+            Can you explain the exact geometric intuition Grant gives for the dot product in Query-Key matching around 25 minutes, and write a quick Python snippet showing it?
+          </div>
+</div>
+<img class="w-8 h-8 rounded-full object-cover shrink-0 shadow-sm mt-1" data-alt="Portrait avatar of a software developer with dark hair, focused neutral expression, warm ambient lighting, high quality portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYB001j9tyR75_9XrF0hVkoXri36Z9ozlB8GSl4SKgkskZXfzZrVozT2JP04OLNEltrNzqouZWW5Q83KfNkHR6t_5cMtAedCvFTHWfW1ybbsGRwUVlgEZ7vd4IF2UKeimPYJbwN7xCiWfoW3qDV7u2PIreVCbqmUoKd2-YtU0pKKISKQ72uT5mfoPJOtXP3CgidFKul475_-r-iszz1hDLN8Sr8csdT4T27emRzdryKtCJToTKqOu6"/>
+</div>
+<!-- Claude Agent Response with Python Snippet & Keyframe -->
+<div class="flex items-start gap-space-md">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 shadow-sm mt-1">
+<span class="material-symbols-outlined text-[18px]">asterisk</span>
+</div>
+<div class="flex-1 space-y-space-md min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Claude</span>
+<span class="font-code-md text-code-md text-secondary">3.5 Sonnet</span>
+<span class="font-timestamp-tag text-timestamp-tag text-outline">14:05 PM</span>
+</div>
+<div class="font-body-lg text-body-lg text-on-surface space-y-4 leading-relaxed">
+<p>
+              Around <button class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded bg-surface-container-high text-primary font-timestamp-tag text-timestamp-tag hover:bg-surface-bright transition-colors">▶ 24:45</button> through <button class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded bg-surface-container-high text-primary font-timestamp-tag text-timestamp-tag hover:bg-surface-bright transition-colors">▶ 26:10</button>, Grant illustrates Query-Key attention not merely as raw algebra, but as an <strong class="text-on-surface">alignment detector in directional vector space</strong>.
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              When token <em class="text-on-surface">A</em> ("creamy") evaluates token <em class="text-on-surface">B</em> ("soup"), the model multiplies their embedding by learned weight matrices $W_Q$ and $W_K$. Geometrically:
+            </p>
+<!-- Visual Keyframe Callout Card -->
+<div class="p-space-sm rounded-xl bg-surface-container-low shadow-sm">
+<div class="flex flex-col sm:flex-row items-center gap-space-md">
+<div class="relative w-full sm:w-48 aspect-video rounded-lg overflow-hidden bg-surface-container-lowest shrink-0 shadow">
+<img class="w-full h-full object-cover" data-alt="Animation slide from 3Blue1Brown video showing mathematical diagram of dot product projection between query vector q and key vector k with cosine angle theta highlighted in warm gold and terracotta colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2ZaBqlH78uJOD9egD_-3d01y6V3MfdW_LE5ybQPwzWV72H2xRXYppH_JNFetkKrX0mTB5m4x-LuI_fF88Hibl4A9c5PodmwpK9J7WcPCcFsSlr4Cl8N1585hyKdcsyTkRb7n1kUItxyH4asExK6UU-YR9aM6H7JLNyyegHvZVehl08Q0JyPYY2Rc6CxYdwmrwQ6BlkGN2t0oyVrUuyQHdxpxuiQC-PNStEHFBUrUM-0n8PY6gHEYv"/>
+<div class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 text-secondary font-timestamp-tag text-timestamp-tag">
+                    25:48
+                  </div>
+</div>
+<div class="space-y-1 text-left min-w-0">
+<div class="font-label-xs text-label-xs uppercase tracking-wider text-secondary font-semibold">Video Keyframe • 25:48</div>
+<h4 class="font-headline-sm text-body-md font-medium text-on-surface truncate">Projection &amp; Cosine Similarity</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                    "If the vectors point in the same direction, their dot product is large and positive: the Query found its Key."
+                  </p>
+</div>
+</div>
+</div>
+<!-- Python Code Block -->
+<div class="rounded-xl overflow-hidden bg-surface-container-lowest shadow-lg">
+<div class="px-4 py-2.5 bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary/40"></span>
+<span class="font-code-md text-code-md text-on-surface font-medium">scaled_dot_product_attention.py</span>
+</div>
+<button class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-body-sm text-body-sm" onclick="navigator.clipboard.writeText('def scaled_dot_product_attention(q, k, v):...')">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+<div class="p-4 font-code-md text-code-md leading-relaxed overflow-x-auto text-on-surface-variant bg-surface-container-lowest">
+<pre class="space-y-0.5"><code><span class="text-outline">01</span>  <span class="text-primary font-medium">import</span> torch
+<span class="text-outline">02</span>  <span class="text-primary font-medium">import</span> torch.nn.functional <span class="text-primary font-medium">as</span> F
+<span class="text-outline">03</span>
+<span class="text-outline">04</span>  <span class="text-primary font-medium">def</span> <span class="text-secondary font-medium">geometric_qk_attention</span>(query: torch.Tensor, key: torch.Tensor, value: torch.Tensor):
+<span class="text-outline">05</span>      <span class="text-outline"># Grant's intuition @ 25:12: Dot product measures vector projection resonance</span>
+<span class="text-outline">06</span>      d_k = query.size(-1)
+<span class="text-outline">07</span>      
+<span class="text-outline">08</span>      <span class="text-outline"># [Batch, Heads, Seq_q, d_k] @ [Batch, Heads, d_k, Seq_k] -&gt; [Batch, Heads, Seq_q, Seq_k]</span>
+<span class="text-outline">09</span>      scores = torch.matmul(query, key.transpose(-2, -1))
+<span class="text-outline">10</span>      
+<span class="text-outline">11</span>      <span class="text-outline"># Scaling prevents high variance in large dimensional spaces (avoids vanishing softmax gradients)</span>
+<span class="text-outline">12</span>      scaled_scores = scores / (d_k ** 0.5)
+<span class="text-outline">13</span>      
+<span class="text-outline">14</span>      <span class="text-outline"># Softmax normalizes resonance scores into dynamic distribution weights</span>
+<span class="text-outline">15</span>      weights = F.softmax(scaled_scores, dim=-1)
+<span class="text-outline">16</span>      
+<span class="text-outline">17</span>      <span class="text-outline"># Transport Values according to attention affinity</span>
+<span class="text-outline">18</span>      context = torch.matmul(weights, value)
+<span class="text-outline">19</span>      <span class="text-primary font-medium">return</span> context, weights</code></pre>
+</div>
+</div>
+<!-- Follow-up Prompt Suggestions -->
+<div class="space-y-2 pt-2">
+<div class="font-label-xs text-label-xs uppercase tracking-wider text-outline">Related Inquiries from Video Context</div>
+<div class="flex items-center gap-2 flex-wrap">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-body-sm text-body-sm text-left">
+                  "Why does dividing by √d_k stabilize gradients?"
+                </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-body-sm text-body-sm text-left">
+                  "Show keyframe animation at 27:32"
+                </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-body-sm text-body-sm text-left">
+                  "Summarize the next section on Multi-Head Attention"
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Developer Omnibar Input Dock (Fixed Claude-Code Style) -->
+<div class="fixed bottom-0 left-72 right-0 px-space-md lg:px-space-xl pb-5 pt-2 z-40 bg-gradient-to-t from-surface via-surface/95 to-transparent pointer-events-none">
+<div class="max-w-3xl mx-auto pointer-events-auto">
+<div class="rounded-2xl bg-surface-container-high shadow-2xl p-space-sm backdrop-blur-2xl transition-all">
+<!-- Omnibar Mode Switcher & Ingest Input Bar -->
+<div class="flex items-center justify-between px-2 py-1 mb-1">
+<div class="flex items-center gap-1">
+<button class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container text-on-surface font-body-sm text-body-sm font-medium">
+<span class="material-symbols-outlined text-[15px] text-secondary">forum</span>
+<span>Chat with Video</span>
+</button>
+<button class="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[15px] text-outline">add_link</span>
+<span>Ingest New URL</span>
+</button>
+</div>
+<!-- Video Active Attachment Pill -->
+<div class="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-secondary font-code-md text-code-md">
+<span class="material-symbols-outlined text-[14px]">smart_display</span>
+<span class="truncate max-w-[140px]">3Blue1Brown - Transformers</span>
+<button class="text-outline hover:text-on-surface ml-0.5"><span class="material-symbols-outlined text-[13px]">close</span></button>
+</div>
+</div>
+<!-- Main Prompt Textarea -->
+<div class="relative px-2 pt-1 pb-2">
+<textarea class="w-full bg-transparent text-on-surface placeholder:text-outline text-body-md font-body-md resize-none focus:outline-none" placeholder="Ask anything about this video, jump to timestamps (e.g. 'what happens at 35:20?'), or ask for code..." rows="2"></textarea>
+</div>
+<!-- Utility Toolbar & Submit Action -->
+<div class="flex items-center justify-between px-2 pt-1">
+<div class="flex items-center gap-2 flex-wrap">
+<!-- Timestamp Auto-cite Switch -->
+<button class="flex items-center gap-1.5 px-2 py-1 rounded-md bg-primary-container/20 text-primary font-body-sm text-body-sm hover:bg-primary-container/30 transition-colors">
+<span class="material-symbols-outlined text-[15px]">timeline</span>
+<span class="text-label-xs font-label-xs font-semibold">Auto-cite timestamps: ON</span>
+</button>
+<!-- Attachment Tool -->
+<button class="p-1.5 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Attach notes or local transcript">
+<span class="material-symbols-outlined text-[18px]">attachment</span>
+</button>
+<!-- Model Badge -->
+<div class="hidden md:flex items-center gap-1 text-outline font-label-xs text-label-xs">
+<span>Model: Claude 3.5 Sonnet</span>
+<span>•</span>
+<span class="text-secondary font-code-md">18.4k / 200k tokens</span>
+</div>
+</div>
+<!-- Send Action Button -->
+<div class="flex items-center gap-2">
+<span class="hidden sm:inline font-label-xs text-label-xs text-outline">↵ Return</span>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary flex items-center justify-center transition-all shadow-md">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

@@ -1,3 +1,16 @@
 .env
+*.pyc
+__pycache__/
+.venv/
+venv/
+*.egg-info/
+backend/chroma_db/
+backend/vector_store/
+backend/chatbot.db
+node_modules/
+frontend/dist/
+frontend/.vite/
+.DS_Store
+*.log
 .env.*
 !.env.example
