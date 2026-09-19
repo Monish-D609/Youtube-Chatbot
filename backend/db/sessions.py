@@ -44,7 +44,10 @@ def _get_client() -> Client:
             raise RuntimeError(
                 "SUPABASE_URL and SUPABASE_SERVICE_KEY must be set in your .env"
             )
-        _client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+        clean_url = SUPABASE_URL.strip().rstrip("/")
+        if clean_url.endswith("/rest/v1"):
+            clean_url = clean_url[:-len("/rest/v1")].rstrip("/")
+        _client = create_client(clean_url, SUPABASE_SERVICE_KEY)
     return _client
 
 
