@@ -2,6 +2,9 @@
   "mcpServers": {
     "render": {
       "serverUrl": "https://mcp.render.com/mcp"
+    },
+    "vercel": {
+      "serverUrl": "https://mcp.vercel.com"
     }
   }
 }
